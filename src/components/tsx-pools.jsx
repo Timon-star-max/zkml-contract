@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import Table from '../assets/svg/Table.svg';
-import BorderEffect from '../assets/svgs/BorderEffect';
 
 function TransactionPool() {
 

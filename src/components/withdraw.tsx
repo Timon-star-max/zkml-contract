@@ -23,7 +23,6 @@ import { copyTextToClipboard } from '../utils/clipboard';
 import { registryAddress, explorer } from '../utils/constants';
 import { AddressContext, AddressContextType } from './address';
 
-import BorderEffect from '../assets/svgs/BorderEffect';
 import NothingHere from '../assets/svg/NothingHere.svg';
 import './panes.css';
 

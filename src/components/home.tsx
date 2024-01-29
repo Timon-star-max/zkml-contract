@@ -1,7 +1,11 @@
-import './home.css';
+import { useNetwork } from 'wagmi';
 import Logo from '../assets/svg/logo.svg'
 import HomeEffect from "../assets/svgs/HomeEffect";
+import './home.css';
+
 const Home = () => {
+    const { chain } = useNetwork();
+    
     return (
         <div className="">
             <div className="logo_effect">
@@ -11,8 +15,8 @@ const Home = () => {
                             <img src={Logo} className="heart" alt=""/>
                         </div>
                         <h1 className="intro_text">Introducing</h1>
-                        <h1 className="intro_text"> Anonymous & Effortless ETH</h1>
-                        <h1 className="intro_text"> Transfers on Goerli Network</h1>
+                        <h1 className="intro_text"> Anonymous & Effortless {chain?.nativeCurrency.symbol || 'Crypto'}</h1>
+                        <h1 className="intro_text"> Transfers on {chain?.name.split(' ')[0] || 'any EVM'} Network</h1>
                     </div>
                 </div>
             </div>

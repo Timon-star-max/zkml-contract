@@ -1,6 +1,5 @@
 import { ec as EC } from 'elliptic';
 import { useCallback, useContext, useEffect, useState } from 'react';
-import { useNetwork } from 'wagmi';
 import { faCopy, faSave } from '@fortawesome/free-regular-svg-icons';
 import { faCheckCircle, faRotate } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -24,15 +23,9 @@ const Zkmlid = () => {
 
     const [metaAddr, setMetaAddr] = useState<string>();
     const [copied, setCopied] = useState<boolean>(false);
-    const [opened, setOpened] = useState<boolean>(true);
     const [loadError, setLoadError] = useState<boolean>(false);
     const [loadSuccess, setLoadSuccess] = useState<boolean>(false);
-    const [hash] = useState<string>(window.location.hash);
     const [keySaved, setKeySaved] = useState<boolean>(true);
-
-    useEffect(() => {
-        setOpened(hash.length < 20);
-    }, [hash]);
 
     const [storedSpendingKey, setStoredSpendingKey] = useLocalStorage<
         string | null
