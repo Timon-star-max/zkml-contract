@@ -1,0 +1,107 @@
+.intro {
+    position: relative;
+    margin-top: 15em;
+    margin-bottom: 10em;
+    width: 1280px;
+    display: flex;
+    flex-direction: row;
+}
+.intro_stealth {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 55%;
+    border-radius: 2rem;
+    border: 1px solid white;
+    overflow: hidden;
+}
+.intro_stealth_text {
+    padding: 10px 50px;
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+}
+.intro_eth {
+    width: 35%;
+    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 2rem;
+    border: 1px solid white;
+    overflow: hidden;
+}
+.img_eth {
+    overflow: hidden;
+    opacity: 0.5;
+    z-index: -99;
+}
+.intro_eth_text {
+    margin-top: -3em;
+    padding: 10px 50px;
+    font-size: 2rem;
+    color: white;
+    text-align: center;
+}
+
+@media only screen and (max-width: 767px) {
+    .intro {
+        flex-direction: column;
+        width: 400px;
+    }
+    .intro_stealth_text {
+        font-size: 1.2rem;
+    }
+    .intro_stealth {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+    .intro_eth {
+        width: 100%;
+    }
+    .intro_eth_text {
+        font-size: 1.2rem;
+    }
+}
+  
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+    .intro {
+        flex-direction: column;
+        width: 600px;
+    }
+    .intro_stealth_text {
+        font-size: 1.5rem;
+    }
+    .intro_stealth {
+        width: 100%;
+        margin-bottom: 5rem;
+    }
+    .intro_eth {
+        width: 100%;
+    }
+    .intro_eth_text {
+        font-size: 1.5rem;
+    }
+}
+
+@media only screen and (min-width: 960px) and (max-width: 1280px) {
+    .intro {
+        width: 960px;
+    }
+    .intro_stealth_text {
+        font-size: 1.5rem;
+    }
+    .intro_eth_text {
+        font-size: 1.5rem;
+    }
+    .intro_stealth {
+        width: 58%;
+    }
+    .intro_eth {
+        width: 40%;
+    }
+    .intro_eth_text {
+        margin-top: -6.8rem;
+    }
+}
+  

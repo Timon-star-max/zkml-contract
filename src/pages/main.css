@@ -1,0 +1,243 @@
+
+.layout {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  isolation: isolate;
+  background: #000000;
+  position: relative;
+}
+.header {
+  position: relative;
+  display: flex;
+  padding: 40px 20px;
+  width: 960px;
+}
+.connect-wallet {
+  margin-left: auto;
+}
+
+.main-panel {
+  position: relative;
+  margin-top: 5rem;
+  width: 960px;
+  height: 430px;
+  background-color: #14161A;
+  padding: 20px 20px;
+  border-radius: 2rem;
+}
+
+.pane.send {
+  background-color: #000000;
+  border-top-right-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  border-bottom-right-radius: 1rem;
+  padding: 20px 20px;
+  height: 350px;
+}
+.pane.receive {
+  background-color: #000000;
+  border-radius: 1rem;
+  padding: 20px 20px;
+  height: 350px;
+}
+.pane.datapool {
+  background-color: #000000;
+  border-radius: 1rem;
+  padding: 20px 20px;
+  height: 350px;
+}
+
+.nav-tabs {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px;
+  gap: 16px;
+  width: auto;
+  height: 48px;
+}
+
+.nav-tabs .tab {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  padding: 10px;
+  justify-content: center;
+  gap: 8px;
+
+  min-width: 110px;
+  height: 48px;
+
+  cursor: pointer;
+  
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  color: white;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 0;
+  flex-grow: 0;
+}
+
+.nav-tabs .tab .super {
+  height: 32px;
+
+  /* h2-superscript */
+
+  font-family: 'Poppins';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 26px;
+  /* identical to box height, or 133% */
+
+  /* primary */
+
+  color: #38E5FF;
+
+  /* Inside auto layout */
+
+  flex: none;
+  order: 2;
+  flex-grow: 0;
+}
+
+.nav-tabs .active {
+  background-color: #000000;
+  border-bottom: 2px solid #38E5FF;
+  color: #38E5FF !important;
+}
+
+.nav-tabs .active h2 {
+  color: #38E5FF !important;
+}
+
+.nav-tabs .active .super {
+  color: white !important;
+}
+
+.nav-tabs .tab.disabled h2,
+.nav-tabs .tab.disabled .super,
+.nav-tabs .tab.disabled:hover h2,
+.nav-tabs .tab.disabled:hover .super {
+  color: rgba(232, 232, 233, 0.2) !important;
+}
+
+.footer {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+.footer .register-contract {
+  color: #38E5FF;
+  margin: 1rem;
+}
+.footer .version {
+  text-align: center;
+  color: white;
+  padding: 2rem;
+}
+
+@media (hover: hover) {
+
+  .nav-tabs .tab:hover {
+    border-color: #646cff !important;
+    opacity: 0.8;
+  }
+
+  .nav-tabs .tab:hover h2 {
+    color: #646cff !important;
+  }
+
+  .nav-tabs .tab:hover .super {
+    color: #646cff !important;
+  }
+
+  .hbutton:hover {
+    background: #646cff;
+  }
+
+  .hbutton-lnk:hover {
+    color: #646cff !important;
+    background: none;
+    box-shadow: 0 4px 10px #38E5FF;
+  }
+
+  .header-h .logo-default:hover {
+    opacity: 70;
+    transition: opacity 1s;
+  }
+
+  .hbutton:hover:disabled {
+    background: #646cff;
+  }
+
+  .hbutton-lnk:hover:disabled {
+    background: none;
+    color: #646cff !important;
+  }
+}
+
+
+@media only screen and (max-width: 767px) {
+  .main-panel {
+    width: 400px;
+  }
+  .header {
+    width: 400px;
+  }
+
+  .layout {
+    padding: 0px 0px 32px;
+  }
+
+  .nav-tabs .tab {
+    max-width: 80px;
+  }
+  .nav-tabs {
+    width: 360px;
+    overflow-x: scroll;
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+    gap: 5px;
+  }
+
+  .nav-tabs::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+
+  .hbutton {
+    padding: 8px;
+  }
+
+
+  p {
+    font-size: 13px;
+    line-height: 18px;
+  }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+  .main-panel {
+    width: 708px;
+  }
+
+  .header {
+    width: 708px;
+  }
+
+  .nav-tabs {
+    overflow-x: scroll;
+    -ms-overflow-style: none; /* Internet Explorer 10+ */
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .nav-tabs::-webkit-scrollbar {
+    display: none; /* Safari and Chrome */
+  }
+
+}

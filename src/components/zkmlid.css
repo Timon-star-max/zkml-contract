@@ -1,0 +1,168 @@
+
+.zkmlid-content {
+    position: relative;
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.zkml-bg {
+    position: absolute;
+}
+.zkml-bg-img {
+    object-fit: cover;
+}
+.zkml-body{
+    position: relative;
+}
+.zkml-circle-effect {
+    position: absolute;
+    margin-top: -20rem;
+    border-radius: 50%;
+}
+.zkml-title {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+.zkmlid {
+    background-color: #14161A;
+    display: flex;
+    flex-direction: row;
+    border-radius: 2rem;
+    width: 960px;
+    padding: 10px 10px;
+}
+.zkmlid-txt {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.zkmlid-header {
+    width: 30%;
+    display: flex;
+    background-color: #04050A;
+    border-radius: 1.5rem;
+    margin-left: 0.8rem;
+}
+
+.zkmlid-body {
+    width: 68%;
+    display: flex;
+    flex-direction: column;
+    border-radius: 2rem;
+}
+
+.zkmlid-body-generate {
+    background-color: #04050A;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    margin: 0.2rem;
+    padding: 10px 20px;
+}
+.zkmlid-body-control {
+    background-color: #04050A;
+    border-radius: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem;
+    padding: 10px 20px;
+}
+.zkml-id-contracted {
+    font-size: 1.2rem;
+    color: white;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    font-weight: 300;
+    letter-spacing: 0.3rem;
+}
+.zkml-body-txt {
+    font-size: 1.2rem;
+    letter-spacing: 0.1rem;
+    color: white;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+}
+.zkml-button {
+    border-radius: 20px;
+    border: 1px solid white;
+    padding: 0.6em 1em;
+    background-color: #191b27;
+    color: white; 
+    margin-right: 2rem;  
+}
+.zkml-button:hover {
+    border-color: #646cff;
+    color: #646cff;
+}
+.zkml_button:focus,
+.zkml_button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
+
+
+
+
+@media only screen and (max-width: 767px) {
+    .zkmlid {
+        width: 400px;
+        margin: auto;
+    }
+    .zkml-bg {
+        display: none;
+    }
+    .zkmlid-header {
+        display: none;
+    }
+    .zkmlid-body {
+        width: 100%;
+        padding: auto;
+    }
+    .zkml-button {
+        width: 100%;
+        margin: 0.5rem 0rem;
+    }
+    .zkml-title {
+        font-size: 1.5rem;
+    }
+    .zkml-circle-effect {
+        margin-top: -40rem;
+    }
+    .zkml-id-contracted {
+        line-height: 1.5;
+        font-size: 1em;
+    }
+    .zkml-body-txt {
+        line-height: 1.5;
+        font-size: 1em;
+    }
+}
+  
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+    .zkmlid {
+        max-width: 708px;
+        margin: auto;
+    }
+    .zkml-bg {
+        display: none;
+    }
+    .zkmlid-header {
+        display: none;
+    }
+    .zkmlid-body {
+        width: 100%;
+    }
+}
+@media only screen and (min-width: 960px) and (max-width: 1280px) {
+    .zkml-bg {
+        display: none;
+    }
+    .zkml-body {
+        width: 960;
+    }
+    
+}
+  

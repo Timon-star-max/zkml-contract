@@ -1,0 +1,145 @@
+.home_effect {
+    position: relative;
+    margin-top: -4em;
+    z-index: -99;
+}
+.home_start {
+    display: flex;
+    flex-direction: column;
+    margin: -3em auto;
+    align-items: center;
+}
+.outline-container {
+    border-radius: 30px;
+    border: 1px solid white;
+    width: 150px;
+    display: flex;
+    padding: 7px 7px;
+}
+.btn_start {
+    position: relative;
+    width: 100%;
+    background-color: #05B7D1;
+    border-radius: 20px;
+    padding: 0.6em 0.2em;
+    font-weight: bold;
+    overflow: hidden;
+    color: white;
+    text-align: center;
+}
+
+.btn_start::before {
+    content: 'Docs >';
+    position: absolute;
+    top: 0;
+    right: 100%; 
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    padding: 9px 2px;
+    color: #646cff;
+    transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn_start:hover::before {
+    right: 0; 
+    background-color: white; 
+    color: #646cff;
+}
+
+.btn_start:focus,
+.btn_start:focus-visible {
+    outline: none; 
+}
+.container-pulse {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    margin-top: 50px;
+}
+.box-pulse {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.pulse {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 1px solid #05B7D1;
+    margin-bottom: 5em;
+}
+.pulse::before,
+.pulse::after {
+    opacity: .8;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: -1;
+    border-radius: 50%;
+    background-color: #05B7D1;
+    content: "";
+}
+.pulse::before {
+    animation: pulse-circle 2s ease-out infinite;
+}
+.pulse::after {
+    animation: pulse-circle 4s 2s ease-out infinite;
+}
+.heart {
+    width: 50%;
+    animation: pulse-heart 2s ease-in-out infinite;
+}
+.intro_text {
+    font-size: 3rem;
+    padding: 7px 0px;
+    color: white;
+    letter-spacing: 0.5rem;
+}
+/* pulse animation of heartbeat */
+@keyframes pulse-heart {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+/* pulse animation of circle */
+@keyframes pulse-circle {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: scale(3);
+    }
+}
+
+
+@media only screen and (max-width: 767px) {
+    .intro_text {
+        font-size: 2rem;
+        letter-spacing: 0;
+    }
+}
+  
+@media only screen and (min-width: 768px) and (max-width: 960px) {
+    .intro_text {
+        letter-spacing: 0.2rem;
+        font-size: 1.9rem;
+    }
+}
+  

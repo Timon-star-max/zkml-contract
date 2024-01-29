@@ -1,0 +1,15 @@
+.wallet_button {
+    border-radius: 20px;
+    border: 1px solid white;
+    padding: 0.6em 1em;
+    background-color: #191b27;
+    color: white;
+}
+.wallet_button:hover {
+    border-color: #646cff;
+    color: #646cff;
+}
+.wallet_button:focus,
+.wallet_button:focus-visible {
+    outline: 4px auto -webkit-focus-ring-color;
+}
