@@ -131,7 +131,7 @@
 
 @media only screen and (max-width: 767px) {
     .intro_text {
-        font-size: 2rem;
+        font-size: 1.5rem;
         letter-spacing: 0;
     }
 }

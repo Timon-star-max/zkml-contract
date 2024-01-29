@@ -285,7 +285,7 @@ export function Withdraw() {
             <div className='nothing-here'>
               <img src={NothingHere}></img>
             </div>
-            <p>Nothing to withdraw yet.</p>
+            <p style={{color: 'white'}}>Nothing to withdraw yet.</p>
           </div>
         )}
 
