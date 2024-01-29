@@ -155,6 +155,7 @@
   flex-grow: 0;
 
   display: block;
+  margin-left: 13px;
 
   max-width: 800px;
 }

@@ -432,7 +432,7 @@ export function Withdraw() {
             <div className="lane">
               {txPending !== '' && (
                 <p className="message">
-                  <span>Transaction pending. </span>
+                  <span style={{color: 'yellow'}}>Transaction pending. </span>
                   <a
                     href={`https://${explorerAddress}/tx/${txPending}`}
                     target="_blank"

@@ -281,7 +281,7 @@ export function Send() {
           {isSuccess && !isError && !isPrepareError && (
             <div className="lane">
               <p className="message">
-                <strong>Successfully sent!</strong>&nbsp;
+                <strong style={{color: '#38E5FF'}}>Successfully sent!</strong>&nbsp;
                 <a
                   href={`https://${explorerAddress}/tx/${data?.hash}`}
                   className="link-text"

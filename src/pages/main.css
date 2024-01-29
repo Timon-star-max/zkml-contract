@@ -22,7 +22,7 @@
   position: relative;
   margin-top: 5rem;
   width: 960px;
-  height: 430px;
+  height: 460px;
   background-color: #14161A;
   padding: 20px 20px;
   border-radius: 2rem;
@@ -34,19 +34,19 @@
   border-bottom-left-radius: 1rem;
   border-bottom-right-radius: 1rem;
   padding: 20px 20px;
-  height: 350px;
+  height: 370px;
 }
 .pane.receive {
   background-color: #000000;
   border-radius: 1rem;
   padding: 20px 20px;
-  height: 350px;
+  height: 370px;
 }
 .pane.datapool {
   background-color: #000000;
   border-radius: 1rem;
   padding: 20px 20px;
-  height: 350px;
+  height: 370px;
 }
 
 .nav-tabs {
