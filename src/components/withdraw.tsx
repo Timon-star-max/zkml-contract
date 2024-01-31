@@ -295,7 +295,7 @@ export function Withdraw(props:any) {
     if(withdrawError){
       toast({
         title: 'Transaction Warning',
-        description: 'The transaction is currently pending. Check back later at the pool. Please check the Pool and try again.',
+        description: withdrawError.slice(0, 40) + '...',
         status: 'warning', // success, error, warning, info
         duration: 5000, // Duration in milliseconds
         isClosable: true, // Whether the toast is closable by user
