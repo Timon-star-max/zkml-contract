@@ -14,15 +14,16 @@ import {
   rainbowWallet,
   walletConnectWallet,
   coinbaseWallet,
-} from '@rainbow-me/rainbowkit/wallets';
-import '@rainbow-me/rainbowkit/styles.css';
-import PageRoutes from './pages/routes.jsx';
+} from '@rainbow-me/rainbowkit/wallets'
+import '@rainbow-me/rainbowkit/styles.css'
+import PageRoutes from './pages/routes.jsx'
 
 import { publicProvider } from 'wagmi/providers/public'
 import { ChakraProvider } from '@chakra-ui/react'
 
 import { goerli } from 'wagmi/chains'
 import { XRPLDevnet } from './utils/Chain.tsx'
+import './App.css'
 
 const projectId = "dcc5faa20825eedb0f5be1ed59efcbc6";
 const { chains, publicClient } = configureChains(

@@ -10,7 +10,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 55%;
+    width: 47%;
     border-radius: 2rem;
     border: 1px solid white;
     overflow: hidden;
@@ -22,7 +22,7 @@
     text-align: center;
 }
 .intro_eth {
-    width: 35%;
+    width: 47%;
     margin-left: auto;
     display: flex;
     flex-direction: column;
@@ -44,10 +44,31 @@
     text-align: center;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 424px) {
+    .intro {
+        flex-direction: column;
+        width: 360px;
+        margin-top: 10em;
+    }
+    .intro_stealth_text {
+        font-size: 1.2rem;
+    }
+    .intro_stealth {
+        width: 100%;
+        margin-bottom: 2rem;
+    }
+    .intro_eth {
+        width: 100%;
+    }
+    .intro_eth_text {
+        font-size: 1.2rem;
+    }
+}
+@media only screen and (min-width: 425px) and (max-width: 767px) {
     .intro {
         flex-direction: column;
         width: 400px;
+        margin-top: 10em;
     }
     .intro_stealth_text {
         font-size: 1.2rem;
@@ -68,6 +89,7 @@
     .intro {
         flex-direction: column;
         width: 600px;
+        margin-top: 8em;
     }
     .intro_stealth_text {
         font-size: 1.5rem;
@@ -95,10 +117,10 @@
         font-size: 1.5rem;
     }
     .intro_stealth {
-        width: 58%;
+        width: 48%;
     }
     .intro_eth {
-        width: 40%;
+        width: 48%;
     }
     .intro_eth_text {
         margin-top: -6.8rem;

@@ -17,7 +17,7 @@ import EllipseEffect from '../assets/svg/Ellipse.svg';
 const Zkmlid = () => {
     const ec = new EC('secp256k1');
 
-    const { spendingKey, setSpendingKey } = useContext(
+    const { spendingKey, setSpendingKey, setVerxioPrivateKey } = useContext(
         AddressContext
     ) as AddressContextType;
 
@@ -46,14 +46,15 @@ const Zkmlid = () => {
             try {
                 skey = ec.keyFromPrivate(storedSpendingKey, 'hex');
                 setSpendingKey(skey);
+                setVerxioPrivateKey(metaAddr);
             } catch (e) {
                 console.log(e);
             }
         }
-
         if (!skey) {
             generateNewKey();
         }
+        
     }, [storedSpendingKey]);
 
     useEffect(() => {
@@ -69,6 +70,7 @@ const Zkmlid = () => {
         addr.set(crc, data.length);
 
         setMetaAddr('V' + base58.encode(addr));
+        setVerxioPrivateKey('V' + base58.encode(addr));
     }, [spendingKey]);
 
     const handleFile = async (f: File) => {
@@ -82,6 +84,8 @@ const Zkmlid = () => {
         try {
             const key = await f.text();
             const skey = ec.keyFromPrivate(key, 'hex');
+
+            setVerxioPrivateKey(metaAddr);
             setSpendingKey(skey);
             setStoredSpendingKey(key);
 

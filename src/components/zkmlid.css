@@ -104,9 +104,42 @@
 }
 
 
+@media only screen and (max-width: 424px) {
+    .zkmlid {
+        width: 360px;
+        margin: auto;
+    }
+    .zkml-bg {
+        display: none;
+    }
+    .zkmlid-header {
+        display: none;
+    }
+    .zkmlid-body {
+        width: 100%;
+        padding: auto;
+    }
+    .zkml-button {
+        width: 100%;
+        margin: 0.5rem 0rem;
+    }
+    .zkml-title {
+        font-size: 1.2rem;
+    }
+    .zkml-circle-effect {
+        margin-top: -40rem;
+    }
+    .zkml-id-contracted {
+        line-height: 1.5;
+        font-size: 1em;
+    }
+    .zkml-body-txt {
+        line-height: 1.5;
+        font-size: 1em;
+    }
+}
 
-
-@media only screen and (max-width: 767px) {
+@media only screen and (min-width: 425px) and (max-width: 767px) {
     .zkmlid {
         width: 400px;
         margin: auto;
@@ -126,7 +159,7 @@
         margin: 0.5rem 0rem;
     }
     .zkml-title {
-        font-size: 1.5rem;
+        font-size: 1.3rem;
     }
     .zkml-circle-effect {
         margin-top: -40rem;

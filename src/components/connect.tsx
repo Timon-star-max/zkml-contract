@@ -38,7 +38,7 @@ export const Connect = () => {
                 );
               }
               return (
-                <div style={{ display: 'flex', gap: 12 }}>
+                <div className='connect-button-group'>
                   <button
                     onClick={openChainModal}
                     style={{ display: 'flex', alignItems: 'center' }}
@@ -51,7 +51,8 @@ export const Connect = () => {
                           <img
                             alt={chain.name ?? 'Chain icon'}
                             src={chain.iconUrl}
-                            style={{ width: 12, height: 12 }}
+                            style={{ width: 24, height: 24 }}
+                            className='chain-icon'
                           />
                         )}
                       </div>

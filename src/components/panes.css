@@ -61,6 +61,10 @@
   flex-direction: row;
 }
 
+.connected_send {
+  margin-top: 1.5rem;
+  margin-left: 1rem;
+}
 .withdraw_button {
   border-radius: 20px;
   border: 1px solid white;
@@ -78,6 +82,14 @@
   outline: 4px auto -webkit-focus-ring-color;
 }
 
+.withdraw_button:focus-within {
+  background-color: #191b27;
+}
+.withdraw_button:disabled {
+  color: rgb(105, 102, 102);
+  border: 1px solid rgb(105, 102, 102);
+}
+
 .pane .hbutton {
   background: #38E5FF;
   border-radius: 2rem;
@@ -91,7 +103,21 @@
   text-align: center;
   text-transform: uppercase;
   cursor: pointer;
+}
 
+.pooldata {
+  display: flex;
+  flex-direction: row;
+}
+
+.hbutton.control-wallet:focus-within {
+  background-color: #191b27;
+}
+.hbutton.control-wallet:disabled {
+  background-color: #191b27;
+}
+.hbutton.control-wallet:hover {
+  background-color: #191b27;
 }
 
 .send-footer {
@@ -260,8 +286,64 @@
   flex-grow: 0;
 }
 
+.modal-window .receive-txt {
+  font-weight: normal;
+  height: 44px;
+  color: white;
+}
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 424px) {
+  .pane .lane {
+    width: 270px;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 1rem;
+  }
+
+  .pane .input-container {
+    width: 280px;
+  }
+
+  .pane input {
+    width: 70%;
+    padding: 10px 10px;
+    letter-spacing: 0.1rem;
+  }
+
+  .pane label {
+    padding: 3px 10px;
+  }
+
+  .pane .input-container.hint {
+    width: 160px;
+  }
+
+  .pane .hbutton.hbutton-lnk:first-child {
+    padding-left: 0;
+  }
+
+  .pane .back-to-list {
+    margin-right: 0rem;
+  }
+  .pane .withdraw_button {
+    margin-right: 0rem;
+  }
+
+  .modal-window {
+    height: 36px;
+  }
+
+  .modal-window .receive-txt {
+    font-size: 10;
+    height: 10px;
+    margin-top: -1em;
+  }
+
+  .connected_send {
+    margin-left: 0.5rem;
+  }
+}
+@media only screen and (min-width: 425px) and (max-width: 767px) {
   .pane .lane {
     width: 300px;
     flex-direction: column;
@@ -289,6 +371,10 @@
 
   .pane .hbutton.hbutton-lnk:first-child {
     padding-left: 0;
+  }
+
+  .connected_send {
+    margin-left: 0rem;
   }
 
   .modal-window {

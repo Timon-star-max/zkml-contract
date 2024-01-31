@@ -3,13 +3,14 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { useState } from 'react';
+import ReactLoading from 'react-loading';
 import { useNetwork } from 'wagmi';
 
 import AddressProvider from '../components/address';
 import { Connect } from '../components/connect';
 import { Send } from '../components/send';
 import { Withdraw } from '../components/withdraw';
-import TransactionPool from '../components/tsx-pools';
+import { TransactionPool } from '../components/tsx-pools';
 
 import Home from "../components/home";
 import Intro from "../components/intro";
@@ -24,6 +25,8 @@ import './main.css';
 
 const Main = () => {
   const [activeTab, setActiveTab] = useState<string>('send');
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const { chain } = useNetwork();
   const contractAddress = registryAddress[chain?.id || 100 || 10200];
@@ -33,7 +36,7 @@ const Main = () => {
     <section className="layout">
       <div className="header">
         <div className="">
-          <img className="" src={Logo} />
+          <img className="logo" src={Logo} />
         </div>
         <div className="connect-wallet">
           <Connect />
@@ -78,7 +81,7 @@ const Main = () => {
             className="pane send"
             style={{ display: activeTab === 'send' ? 'block' : 'none' }}
           >
-            <Send />
+            <Send setIsLoading={setIsLoading} />
           </div>
           <div
             className="pane receive"
@@ -86,13 +89,13 @@ const Main = () => {
               display: activeTab === 'withdraw' ? 'block' : 'none',
             }}
           >
-            <Withdraw />
+            <Withdraw setIsLoading={setIsLoading} activeTab={activeTab}/>
           </div>
           <div
             className="pane datapool"
             style={{ display: activeTab === 'spend' ? 'block' : 'none' }}
           >
-            < TransactionPool />
+            < TransactionPool activeTab={activeTab}/>
           </div>
 
         </div>
@@ -115,6 +118,12 @@ const Main = () => {
         </a>
         <h2 className="version">v1.0.0</h2>
       </div>
+      {
+        isLoading &&
+        <div className='loading'>
+          <ReactLoading type="bars" color="#38E5FF" />
+        </div>
+      }
     </section>
   );
 }

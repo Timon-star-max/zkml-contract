@@ -1,4 +1,5 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
+import { useToast } from '@chakra-ui/react';
 import { StaticJsonRpcProvider } from '@ethersproject/providers';
 import {
   faArrowRight,
@@ -18,6 +19,8 @@ import { ethers } from 'ethers';
 import { parseEther } from 'viem'
 import { getAddress, keccak256 } from 'ethers/lib/utils';
 import { useAccount, useContractRead, useNetwork, } from 'wagmi';
+import { supabase } from '../utils/constants';
+
 import { ZkmlPayABI } from '../contracts/abi.json';
 import { copyTextToClipboard } from '../utils/clipboard';
 import { registryAddress, explorer } from '../utils/constants';
@@ -27,11 +30,14 @@ import NothingHere from '../assets/svg/NothingHere.svg';
 import './panes.css';
 
 
-export function Withdraw() {
+export function Withdraw(props:any) {
+
+  const { setIsLoading, activeTab } = props;
   const ec = useMemo(() => {
     return new EC('secp256k1');
   }, []);
 
+  const { verxioPrivateKey } = useContext(AddressContext) as AddressContextType;
   const { spendingKey } = useContext(AddressContext) as AddressContextType;
   const [keyAddrs, setKeyAddrs] = useState<Array<string[]>>([]);
   const [modalVisible, setModalVisible] = useState<boolean>(false);
@@ -43,6 +49,7 @@ export function Withdraw() {
   const [withdrawSuccess, setWithdrawSuccess] = useState<string>();
   const [withdrawError, setWithdrawError] = useState<string>();
   const [txPending, setTxPending] = useState<string>('');
+  const toast = useToast();
 
   const { chain } = useNetwork();
   const { isConnected, address } = useAccount();
@@ -73,6 +80,25 @@ export function Withdraw() {
     functionName: 'totalKeys',
     enabled: isConnected,
   });
+
+  const saveData =  async (address: any) => {
+    const date = new Date(); 
+    const isoDateString = date.toISOString();
+
+    await supabase
+      .from('zkml')
+      .upsert([
+        { 
+          zkmlid: verxioPrivateKey, 
+          type: 'receive',
+          address: address,
+          amount:  active?.balance,
+          createtime: isoDateString,
+          cryptotype: chain?.nativeCurrency.symbol,
+          explorerAddress: explorerAddress
+        },
+      ])
+  }
 
 
   useEffect(() => {
@@ -105,7 +131,7 @@ export function Withdraw() {
         }
       });
     });
-  }, [keysCount, refetchKeys, isConnected, spendingKey, keysIndex]);
+  }, [keysCount, refetchKeys, isConnected, spendingKey, keysIndex, activeTab]);
 
   useEffect(() => {
     setTargetAddr('');
@@ -142,9 +168,6 @@ export function Withdraw() {
         const { x, y, ss, token } = key;
         const _x = parseInt(x, 16);
         const _y = parseInt(y, 16);
-
-
-
         if (_x === 0 || _y === 0) return null;
 
         let eph;
@@ -176,7 +199,7 @@ export function Withdraw() {
         if (token === ethers.constants.AddressZero) {
           const bal = await fetchBalance({ address: `0x${addr.substring(2)}` });
 
-          if (bal) {
+          if (bal.formatted != '0') {
             return [x, y, token, bal.formatted, addr];
           }
         } else {
@@ -214,9 +237,11 @@ export function Withdraw() {
     addr: `0x${string}`,
     target: `0x${string}`
   ) => {
+    
     if (!spendingKey) return;
-
+    let receiveaddress;
     setIsSending(true);
+    setIsLoading(true);
     const bal = await fetchBalance({ address: addr });
     const key = buildPrivateKey(x, y, spendingKey);
     // Prepare the transaction
@@ -251,17 +276,43 @@ export function Withdraw() {
 
       setTxPending('');
       setWithdrawSuccess(data.transactionHash);
-
+      receiveaddress = data.transactionHash;
       // exclude address from the list
       setKeyAddrs(keyAddrs.filter((p) => p[4] !== addr));
     } catch (e) {
       setWithdrawError((e as Error).message);
       setTxPending('');
     }
-
+    saveData(receiveaddress);
     setIsSending(false);
   };
 
+  useEffect(() => {
+      setIsLoading(isSending);
+  }, [isSending]);
+
+  useEffect(() => {
+    if(withdrawError){
+      toast({
+        title: 'Transaction Warning',
+        description: 'The transaction is currently pending. Check back later at the pool. Please check the Pool and try again.',
+        status: 'warning', // success, error, warning, info
+        duration: 5000, // Duration in milliseconds
+        isClosable: true, // Whether the toast is closable by user
+        position: "top-right"
+      });
+    };
+    if (withdrawSuccess) {
+      toast({
+        title: 'Transaction Success',
+        description: 'Celbrate! You have successfully withdrawn your funds.',
+        status: 'success', // success, error, warning, info
+        duration: 5000, // Duration in milliseconds
+        isClosable: true, // Whether the toast is closable by user
+        position: "top-right"
+      });
+    }
+  }, [withdrawError, withdrawSuccess])
   if (!isConnected) {
     return (
       <div className="lane">
@@ -285,7 +336,7 @@ export function Withdraw() {
             <div className='nothing-here'>
               <img src={NothingHere}></img>
             </div>
-            <p style={{color: 'white'}}>Nothing to withdraw yet.</p>
+            <p style={{color: 'white'}}>Nothing to withdraw yet</p>
           </div>
         )}
 
@@ -331,10 +382,10 @@ export function Withdraw() {
         <div className={modalVisible ? 'modal active' : 'modal'}>
           <div className="lane" style={{ marginTop: '1rem' }}>
             <div className="modal-window">
-              <h2 style={{ fontWeight: 'normal', height: '44px', color: 'white' }}>
+              <p className='receive-txt'>
                 Withdraw {active.balance || '0'}{' '}
                 {chain?.nativeCurrency.symbol}
-              </h2>
+              </p>
 
               <button
                 className="back-to-list hbutton-lnk"
@@ -390,7 +441,7 @@ export function Withdraw() {
               <button
                 className="withdraw_button hbutton-lnk"
                 disabled={isSending || !targetAddr || !isAddressValid}
-                onClick={() =>
+                onClick={() => 
                   withdraw(
                     active.x,
                     active.y,
@@ -471,9 +522,6 @@ export function Withdraw() {
           )}
         </div>
 
-        <p className="send-txt-content">
-          Keys checked: {keysIndex} / {keysCount}
-        </p>
       </div>
     );
   }

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useToast } from '@chakra-ui/react';
 import { curve, ec as EC } from 'elliptic';
 import { BigNumber, ethers } from 'ethers';
 import { base58, getAddress, keccak256, parseEther } from 'ethers/lib/utils.js';
@@ -10,6 +11,7 @@ import {
   usePrepareContractWrite,
   useWaitForTransaction
 } from 'wagmi';
+
 import { ZkmlPayABI } from '../contracts/abi.json';
 import { registryAddress, explorer } from '../utils/constants';
 import { calculateCrc } from '../utils/crc16';
@@ -17,10 +19,14 @@ import useDebounce from '../utils/debounce';
 import { Connect } from './connect';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { supabase } from '../utils/constants';
+
 import './panes.css';
 
 const zero = BigNumber.from(0);
-export function Send() {
+
+export function Send(props: any) {
+  const { setIsLoading } = props;
   const ec = useMemo(() => {
     return new EC('secp256k1');
   }, []);
@@ -45,6 +51,7 @@ export function Send() {
   const [amount, setAmount] = useState<string>('0');
   const [amountWei, setAmountWei] = useState<BigNumber>(zero);
   const [hash] = useState<string>(window.location.hash);
+  const toast = useToast();
 
   const debouncedAmount = useDebounce(amountWei, 500);
   const debouncedAddr = useDebounce(xdcAddr, 500);
@@ -109,6 +116,8 @@ export function Send() {
       return;
     }
 
+    
+
     const trueID = decodedID.subarray(0, 33);
     const crc = calculateCrc(trueID);
     if (!crc.every((x, idx) => x === decodedID[33 + idx])) {
@@ -148,8 +157,30 @@ export function Send() {
     }
   }, [theirID, ec]);
 
+  const saveData =  async () => {
+    const date = new Date(); 
+    const isoDateString = date.toISOString();
+    
+    await supabase
+      .from('zkml')
+      .upsert([
+        { 
+          zkmlid: theirID, 
+          type: 'send',
+          address: data?.hash,
+          amount:  amount,
+          createtime: isoDateString,
+          cryptotype: chain?.nativeCurrency.symbol,
+          explorerAddress: explorerAddress
+        },
+      ])
+  }
+
   useEffect(() => {
-    if (!theirID) return;
+    if (!theirID) {
+      setZkmlIDError(true);
+      return;
+    }
 
     if (theirID.startsWith('https://zkml/#')) {
       setTheirID(theirID.replace('https://zkml/#', ''));
@@ -158,9 +189,45 @@ export function Send() {
     }
   }, [theirID, generateNewEphKey]);
 
+  
   useEffect(() => {
     generateNewEphKey();
-  }, [isSuccess]);
+    if (isSuccess) {
+      toast({
+        title: 'Success Transaction',
+        description: 'You can withdraw funds by use key',
+        status: 'success', // success, error, warning, info
+        duration: 5000, // Duration in milliseconds
+        isClosable: true, // Whether the toast is closable by user
+        position: "top-right"
+      });
+      saveData();
+    }
+    setIsLoading(isLoading);
+  }, [isSuccess, isLoading]);
+
+  useEffect(() => {
+    if (isPrepareError) {
+      toast({
+        title: prepareError?.name,
+        description: prepareError?.message,
+        status: 'error', // success, error, warning, info
+        duration: 5000, // Duration in milliseconds
+        isClosable: true, // Whether the toast is closable by user
+        position: "top-right"
+      });
+    }
+    if (isError) {
+      toast({
+        title: error?.name,
+        description: error?.message,
+        status: 'error', // success, error, warning, info
+        duration: 5000, // Duration in milliseconds
+        isClosable: true, // Whether the toast is closable by user
+        position: "top-right"
+      });
+    }
+  }, [isPrepareError, isError])
 
   useEffect(() => {
     if (hash.length > 20) {
@@ -213,7 +280,7 @@ export function Send() {
 
       {!isConnected && (
         <>
-          <div style={{ marginTop: '1.5rem' }}>
+          <div className='connected_send'>
             <Connect />
           </div>
         </>
@@ -246,7 +313,7 @@ export function Send() {
               </div>
               <div className='send-footer'>
                 <button
-                  className="hbutton"
+                  className="hbutton control-wallet"
                   color="success"
                   disabled={!write || isLoading || amountError || ZkmlIDError}
                   onClick={(e) => {
@@ -262,18 +329,18 @@ export function Send() {
                       : `Send ${chain?.nativeCurrency.symbol}`}
                   </span>
                 </button>
-                
+
                 <input
                   value={`${Number(balance.formatted).toFixed(4)} ${chain?.nativeCurrency.symbol
                     }`}
-                    style={{backgroundColor: "black"}}
+                  style={{ backgroundColor: "black" }}
                   disabled
                 />
                 <span className="send-txt-label">Available:</span>
               </div>
             </div>
           </form>
-          {ZkmlIDError && (
+          {theirID && ZkmlIDError && (
             <div className="lane">
               <p className="message error">Invalid Zkml ID</p>
             </div>
@@ -281,7 +348,7 @@ export function Send() {
           {isSuccess && !isError && !isPrepareError && (
             <div className="lane">
               <p className="message">
-                <strong style={{color: '#38E5FF'}}>Successfully sent!</strong>&nbsp;
+                <strong style={{ color: '#38E5FF' }}>Successfully sent!</strong>&nbsp;
                 <a
                   href={`https://${explorerAddress}/tx/${data?.hash}`}
                   className="link-text"
@@ -294,13 +361,6 @@ export function Send() {
                     transform={{ rotate: -45 }}
                   />
                 </a>
-              </p>
-            </div>
-          )}
-          {(isPrepareError || isError) && (
-            <div className="lane">
-              <p className="message error">
-                Error: {(prepareError || error)?.message}
               </p>
             </div>
           )}
