@@ -160,7 +160,7 @@ export function Send(props: any) {
   const saveData =  async () => {
     const date = new Date(); 
     const isoDateString = date.toISOString();
-    
+
     await supabase
       .from('zkml')
       .upsert([
@@ -209,8 +209,8 @@ export function Send(props: any) {
   useEffect(() => {
     if (isPrepareError) {
       toast({
-        title: prepareError?.name,
-        description: prepareError?.message,
+        title: "Transaction Failed",
+        description: prepareError?.message.slice(0, 40) + '...',
         status: 'error', // success, error, warning, info
         duration: 5000, // Duration in milliseconds
         isClosable: true, // Whether the toast is closable by user
@@ -219,8 +219,8 @@ export function Send(props: any) {
     }
     if (isError) {
       toast({
-        title: error?.name,
-        description: error?.message,
+        title: "Transaction Failed",
+        description: error?.message.slice(0, 40) + '...',
         status: 'error', // success, error, warning, info
         duration: 5000, // Duration in milliseconds
         isClosable: true, // Whether the toast is closable by user
