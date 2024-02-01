@@ -26,37 +26,35 @@ import './panes.css';
 const zero = BigNumber.from(0);
 
 export function Send(props: any) {
-  const { setIsLoading } = props;
+  
   const ec = useMemo(() => {
     return new EC('secp256k1');
   }, []);
 
+  const { chain } = useNetwork();
+  const { setIsLoading } = props;
+  const explorerAddress = explorer[chain?.id || 100 || 10200];
   const { address, isConnected } = useAccount();
   const { data: balance } = useBalance({
     address,
     watch: true,
     cacheTime: 3_500,
   });
-
-  const { chain } = useNetwork();
-
-  const [xdcAddr, setxdcAddr] = useState<string>(
-    ethers.constants.AddressZero
-  );
+  
+  const [xdcAddr, setxdcAddr]                   = useState<string>(ethers.constants.AddressZero);
   const [sharedSecretByte, setSharedSecretByte] = useState<string>('0x00');
-  const [theirID, setTheirID] = useState<string>('');
-  const [ephPublic, setEphPublic] = useState<curve.base.BasePoint>();
-  const [ZkmlIDError, setZkmlIDError] = useState<boolean>(false);
-  const [amountError, setAmountError] = useState<boolean>(false);
-  const [amount, setAmount] = useState<string>('0');
-  const [amountWei, setAmountWei] = useState<BigNumber>(zero);
-  const [hash] = useState<string>(window.location.hash);
-  const toast = useToast();
+  const [theirID, setTheirID]                   = useState<string>('');
+  const [ephPublic, setEphPublic]               = useState<curve.base.BasePoint>();
+  const [ZkmlIDError, setZkmlIDError]           = useState<boolean>(false);
+  const [amountError, setAmountError]           = useState<boolean>(false);
+  const [amount, setAmount]                     = useState<string>('0');
+  const [amountWei, setAmountWei]               = useState<BigNumber>(zero);
+  const [hash]                                  = useState<string>(window.location.hash);
+  const toast                                   = useToast();
 
   const debouncedAmount = useDebounce(amountWei, 500);
-  const debouncedAddr = useDebounce(xdcAddr, 500);
-  const explorerAddress = explorer[chain?.id || 100 || 10200];
-
+  const debouncedAddr   = useDebounce(xdcAddr, 500);
+  
   const {
     isError: isPrepareError,
     error: prepareError,

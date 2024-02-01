@@ -21,11 +21,12 @@ import './panes.css';
 export function TransactionPool(props: any) {
 
   const { activeTab } = props;
-  const { isConnected } = useAccount();
-  const [transactions, setTransactions] = useState<Array<any>>([]);
-  const { verxioPrivateKey } = useContext(AddressContext) as AddressContextType;
   const { chain } = useNetwork();
+  const { isConnected } = useAccount();
 
+  const [transactions, setTransactions] = useState<Array<any>>([]);
+  const { verxioPrivateKey }            = useContext(AddressContext) as AddressContextType;
+  
   useEffect(() => {
     async function fetchData() {
       const { data, error } = await supabase

@@ -32,36 +32,35 @@ import './panes.css';
 
 export function Withdraw(props:any) {
 
-  const { setIsLoading, activeTab } = props;
   const ec = useMemo(() => {
     return new EC('secp256k1');
   }, []);
 
-  const { verxioPrivateKey } = useContext(AddressContext) as AddressContextType;
-  const { spendingKey } = useContext(AddressContext) as AddressContextType;
-  const [keyAddrs, setKeyAddrs] = useState<Array<string[]>>([]);
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
-  const [active, setActive] = useState<any>({});
-  const [targetAddr, setTargetAddr] = useState<string>('');
-  const [isSending, setIsSending] = useState<boolean>(false);
-  const [isAddressValid, setIsAddressValid] = useState<boolean>(true);
-  const [isCopied, setIsCopied] = useState<boolean>(false);
+  const { verxioPrivateKey }                  = useContext(AddressContext) as AddressContextType;
+  const { spendingKey }                       = useContext(AddressContext) as AddressContextType;
+  const [keyAddrs, setKeyAddrs]               = useState<Array<string[]>>([]);
+  const [modalVisible, setModalVisible]       = useState<boolean>(false);
+  const [active, setActive]                   = useState<any>({});
+  const [targetAddr, setTargetAddr]           = useState<string>('');
+  const [isSending, setIsSending]             = useState<boolean>(false);
+  const [isAddressValid, setIsAddressValid]   = useState<boolean>(true);
+  const [isCopied, setIsCopied]               = useState<boolean>(false);
   const [withdrawSuccess, setWithdrawSuccess] = useState<string>();
-  const [withdrawError, setWithdrawError] = useState<string>();
-  const [txPending, setTxPending] = useState<string>('');
-  const toast = useToast();
+  const [withdrawError, setWithdrawError]     = useState<string>();
+  const [txPending, setTxPending]             = useState<string>('');
+  const [keysCount, setKeysCount]             = useState<number>(0);
+  const [keysIndex, setKeysIndex]             = useState<number>(0);
 
-  const { chain } = useNetwork();
+  const toast                    = useToast();
+  const { chain }                = useNetwork();
   const { isConnected, address } = useAccount();
 
+  const { setIsLoading, activeTab } = props;
   const registryConfig = {
     address: registryAddress[chain?.id || 100 || 10200],
     abi: ZkmlPayABI,
   };
   const explorerAddress = explorer[chain?.id || 100 || 10200];
-
-  const [keysCount, setKeysCount] = useState<number>(0);
-  const [keysIndex, setKeysIndex] = useState<number>(0);
 
   useEffect(() => {
     setKeyAddrs([]);
