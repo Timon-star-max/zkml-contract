@@ -6,7 +6,6 @@ export const registryAddress: AddrMapType = {
   0: '0x0',
   1440002: '0xA2A3b38f6088d729a1454BCD2863ce87B9953079',
   5: '0xa94306874257f2Db42e639C5Ee70DC8617BF8763',
-  // 5: '0xC9275206B639bF69F6c6ec166008D1644586267F'
 }
 
 export const explorer: MapType = {

@@ -1,7 +1,5 @@
 {
     "_format": "hh-sol-artifact-1",
-    "contractName": "StealthAddressRegistry",
-    "sourceName": "contracts/RegistryAddress.sol",
     "ZkmlPayABI": [
       {
         "inputs": [],
