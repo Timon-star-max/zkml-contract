@@ -178,26 +178,26 @@
 @media (hover: hover) {
 
   .nav-tabs .tab:hover {
-    border-color: #646cff !important;
+    border-color: #38E5FF !important;
     opacity: 0.8;
   }
 
   .nav-tabs .tab:hover h2 {
-    color: #646cff !important;
+    color: #38E5FF !important;
   }
 
   .nav-tabs .tab:hover .super {
-    color: #646cff !important;
+    color: #38E5FF!important;
   }
 
   .hbutton:hover {
-    background: #646cff;
+    background: #92eaf8;
   }
 
   .hbutton-lnk:hover {
-    color: #646cff !important;
+    color: #92eaf8 !important;
     background: none;
-    box-shadow: 0 4px 10px #38E5FF;
+    box-shadow: 0 4px 10px #d4e8eb;
   }
 
   .header-h .logo-default:hover {

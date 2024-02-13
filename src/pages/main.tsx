@@ -12,6 +12,7 @@ import { Send } from '../components/send';
 import { Withdraw } from '../components/withdraw';
 import { TransactionPool } from '../components/tsx-pools';
 
+import Banner from "../components/banner";
 import Home from "../components/home";
 import Intro from "../components/intro";
 import ZkmlId from "../components/zkmlid";
@@ -34,6 +35,7 @@ const Main = () => {
 
   return (
     <section className="layout">
+      {chain?.id == 1440002 && <Banner></Banner>}
       <div className="header">
         <div className="">
           <img className="logo" src={Logo} />

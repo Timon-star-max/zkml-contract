@@ -77,11 +77,9 @@
     margin-top: 1rem;
     margin-bottom: 2rem;
     font-weight: 300;
-    letter-spacing: 0.3rem;
 }
 .zkml-body-txt {
     font-size: 1.2rem;
-    letter-spacing: 0.1rem;
     color: white;
     margin-top: 1rem;
     margin-bottom: 2rem;
@@ -95,8 +93,8 @@
     margin-right: 2rem;  
 }
 .zkml-button:hover {
-    border-color: #646cff;
-    color: #646cff;
+    border-color: #38E5FF;
+    color: #38E5FF;
 }
 .zkml_button:focus,
 .zkml_button:focus-visible {

@@ -21,7 +21,7 @@
     width: 100%;
     background-color: #05B7D1;
     border-radius: 20px;
-    padding: 0.6em 0.2em;
+    padding: 0.55em 0.5em;
     font-weight: bold;
     overflow: hidden;
     color: white;
@@ -37,14 +37,14 @@
     height: 100%;
     background-color: white;
     padding: 9px 2px;
-    color: #646cff;
+    color: #38E5FF;
     transition: cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .btn_start:hover::before {
     right: 0; 
     background-color: white; 
-    color: #646cff;
+    color: #38E5FF;
 }
 
 .btn_start:focus,
@@ -131,14 +131,12 @@
 @media only screen and (max-width: 767px) {
     .intro_text {
         font-size: 1.5rem;
-        letter-spacing: 0;
     }
 }
   
 @media only screen and (min-width: 768px) and (max-width: 960px) {
     .intro_text {
-        letter-spacing: 0.2rem;
-        font-size: 1.9rem;
+        font-size: 2rem;
     }
 }
   
