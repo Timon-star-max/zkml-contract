@@ -25,7 +25,7 @@ const Home = () => {
             </div>
             <div className="home_start">
                 <div className="outline-container">
-                    <a href="https://zkml-docs.vercel.app/" className="btn_start">Docs {">"}</a>
+                    <a href="https://zkml.gitbook.io" className="btn_start">Docs {">"}</a>
                 </div>
             </div>
         </div>
