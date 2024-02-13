@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import { WagmiConfig, createConfig, configureChains, } from 'wagmi'
+import { WagmiConfig, createConfig, configureChains } from 'wagmi'
 import {
   RainbowKitProvider,
   lightTheme,
@@ -21,13 +21,13 @@ import PageRoutes from './pages/routes.jsx'
 import { publicProvider } from 'wagmi/providers/public'
 import { ChakraProvider } from '@chakra-ui/react'
 
-import { goerli } from 'wagmi/chains'
+import { goerli, mainnet } from 'wagmi/chains'
 import { XRPLDevnet } from './utils/Chain.tsx'
 import './App.css'
 
 const projectId = "dcc5faa20825eedb0f5be1ed59efcbc6";
 const { chains, publicClient } = configureChains(
-  [XRPLDevnet, goerli],
+  [XRPLDevnet, goerli, mainnet],
   [
     publicProvider()
   ]

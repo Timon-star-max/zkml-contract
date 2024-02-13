@@ -13,8 +13,6 @@ export const explorer: MapType = {
   5: 'goerli.etherscan.io'
 }
 
-
-
 const supabaseUrl = 'https://sxdgeiweathzyzyqbqux.supabase.co'
 const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InN4ZGdlaXdlYXRoenl6eXFicXV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MDQ0NjAzMjUsImV4cCI6MjAyMDAzNjMyNX0.etStl6NY6KXxb2YFezJuxpHtf4Pmfg5JFp8JuqyTvqQ'
 

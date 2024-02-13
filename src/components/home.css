@@ -100,10 +100,9 @@
     animation: pulse-heart 2s ease-in-out infinite;
 }
 .intro_text {
-    font-size: 3rem;
+    font-size: 3.5rem;
     padding: 7px 0px;
     color: white;
-    letter-spacing: 0.5rem;
 }
 /* pulse animation of heartbeat */
 @keyframes pulse-heart {
